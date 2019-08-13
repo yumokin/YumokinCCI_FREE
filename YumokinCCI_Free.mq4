@@ -4,7 +4,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright (c) 2014, yumokin.jp"
 #property link      "https://fx.yumokin.jp"
-#property version     "1.60 free"
+#property version     "1.70 free"
 #property strict
 
 #include <stderror.mqh>
@@ -111,9 +111,6 @@ int isCandleLengthLarge;
 extern double squeezePips=100;
 extern int shiftCandleLength=1;
 
-int UseBarTime=1;
-datetime BarTime = 0;
-
 //+------------------------------------------------------------------+
 //| expert initialization function                                   |
 //+------------------------------------------------------------------+
@@ -168,15 +165,6 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTick()
 {
-    //バー形成時に１回だけ実施する
-    if(UseBarTime==1){
-        // 始値でなければ終了
-        if(BarTime == Time[0]){
-            return;
-        }
-        BarTime = Time[0];
-    }
-    
     int magicNumber;
     int ret;
     int entry = 0;
